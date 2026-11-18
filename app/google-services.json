@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "480936023390",
+    "project_id": "borrowbuddy-420fd",
+    "storage_bucket": "borrowbuddy-420fd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480936023390:android:a8c9e18bde14cd19ababcf",
+        "android_client_info": {
+          "package_name": "com.borrowbuddy.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj0k4JzXU4ehonnJg-FS2CP8VnAXkD4XA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
