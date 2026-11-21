@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -36,7 +37,6 @@ class MainActivity : AppCompatActivity() {
     private fun loadUserProfile() {
         val currentUser = auth.currentUser
 
-        // 1. Initial display from Auth / Intent extras
         val passedName = intent.getStringExtra("USER_NAME")
         val passedEmail = intent.getStringExtra("USER_EMAIL")
 
@@ -53,11 +53,10 @@ class MainActivity : AppCompatActivity() {
             binding.tvUserEmail.text = "Logged in as: $initialEmail"
         }
 
-        // 2. Fetch fresh user data from Cloud Firestore users/{uid}
         currentUser?.uid?.let { uid ->
             firestore.collection("users").document(uid).get()
                 .addOnSuccessListener { document ->
-                    if (document != null && document.exists()) {
+                    if (document.exists()) {
                         val firestoreName = document.getString("name")
                         if (!firestoreName.isNullOrBlank()) {
                             binding.tvWelcomeTitle.text = "Welcome, $firestoreName!"
@@ -65,20 +64,26 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 .addOnFailureListener {
-                    // Silently preserve display name from Auth if Firestore offline
+                    // Preserve the name already displayed.
                 }
         }
     }
 
     private fun setupListeners() {
-        // Logout Button: Signs out of Firebase and returns to WelcomeActivity
         binding.btnLogout.setOnClickListener {
             auth.signOut()
-            Toast.makeText(this, "Signed out of BorrowBuddy", Toast.LENGTH_SHORT).show()
+
+            Toast.makeText(
+                this,
+                "Signed out of BorrowBuddy",
+                Toast.LENGTH_SHORT
+            ).show()
 
             val intent = Intent(this, WelcomeActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
+
             startActivity(intent)
             finish()
         }
