@@ -1,0 +1,30 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ==========================================
+    // BorrowBuddy Firestore Security Rules
+    // ==========================================
+
+    // Users Collection: users/{userId}
+    match /users/{userId} {
+      // 1. Strict read: Users can ONLY read their own profile document
+      allow read: if request.auth != null && request.auth.uid == userId;
+
+      // 2. Strict create: Users can ONLY create their own profile document matching their authenticated UID
+      allow create: if request.auth != null && request.auth.uid == userId;
+
+      // 3. Strict update: Users can ONLY update their own profile document
+      allow update: if request.auth != null && request.auth.uid == userId;
+
+      // 4. Strict delete: Prevent deletion of user profiles from mobile client
+      allow delete: if false;
+    }
+
+    // Default deny: Block all other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

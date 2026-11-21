@@ -3,6 +3,16 @@ plugins {
     id("com.google.gms.google-services")
 }
 
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.addAll(
+            listOf(
+                "-Xskip-metadata-version-check"
+            )
+        )
+    }
+}
+
 android {
     namespace = "com.borrowbuddy.app"
     compileSdk {
@@ -29,6 +39,10 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 

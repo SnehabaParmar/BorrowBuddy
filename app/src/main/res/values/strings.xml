@@ -1,3 +1,38 @@
 <resources>
     <string name="app_name">BorrowBuddy</string>
+    <string name="splash_tagline">Borrow more. Buy less. Share smarter.</string>
+    <string name="splash_footer">A campus sharing community</string>
+
+    <!-- Welcome Screen -->
+    <string name="welcome_title">Welcome to BorrowBuddy!</string>
+    <string name="welcome_desc">Borrow what you need. Share what you have.\nAll within your campus.</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_create_account">Create an Account</string>
+    <!-- Login Screen -->
+    <string name="login_welcome_back">Welcome Back!</string>
+    <string name="login_subtitle">Login to your BorrowBuddy account.</string>
+    <string name="label_email">Email Address</string>
+    <string name="hint_email">Enter your email address</string>
+    <string name="label_password">Password</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="btn_forgot_password">Forgot Password?</string>
+    <string name="prompt_no_account">Don\'t have an account?</string>
+    <string name="btn_create_account_link">Create Account</string>
+
+    <!-- Register Screen -->
+    <string name="register_title">Create Account</string>
+    <string name="register_subtitle">Join your campus sharing community!</string>
+    <string name="label_full_name">Full Name</string>
+    <string name="hint_full_name">Enter your full name</string>
+    <string name="label_confirm_password">Confirm Password</string>
+    <string name="hint_create_password">Create a password</string>
+    <string name="hint_confirm_password">Re-enter your password</string>
+    <string name="prompt_has_account">Already have an account?</string>
+    <string name="btn_create_account_submit">Create Account</string>
+
+    <!-- Forgot Password Screen -->
+    <string name="forgot_password_title">Forgot Password?</string>
+    <string name="forgot_password_desc">Don\'t worry! Enter your registered email\naddress to reset your password.</string>
+    <string name="btn_send_reset_link">Send Reset Link</string>
+    <string name="btn_back_to_login">&#x2190; Back to Login</string>
 </resources>

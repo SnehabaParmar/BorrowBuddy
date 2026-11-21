@@ -2,4 +2,21 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- BorrowBuddy Brand Palette from Figma -->
+    <color name="splash_bg">#F8FAFC</color>
+    <color name="brand_navy">#0B2A6F</color>
+    <color name="brand_slate">#64748B</color>
+    <color name="brand_blue">#0066FF</color>
+    <color name="brand_cyan">#00D2FF</color>
+    <!-- Welcome & Auth Buttons -->
+    <color name="btn_primary">#0F6CF2</color>
+    <color name="btn_secondary_border">#DCE5F2</color>
+    <color name="btn_secondary_bg">#FFFFFF</color>
+    <color name="btn_secondary_text">#0B2A6F</color>
+    <!-- Input Fields & Icons -->
+    <color name="icon_teal">#00D09E</color>
+    <color name="input_border">#DCE5F2</color>
+    <color name="input_hint">#94A3B8</color>
+    <color name="text_dark">#0F172A</color>
+    <color name="back_btn_bg">#EEF4FF</color>
 </resources>
