@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Network Permissions for Firebase -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -7,11 +8,15 @@
 
     <application
         android:allowBackup="true"
-        android:label="BorrowBuddy"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BorrowBuddy">
 
-        <!-- Splash Screen: App Launcher -->
+        <!-- Your Splash Screen: App Launcher -->
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -24,13 +29,11 @@
 
         </activity>
 
-        <!-- Main Application -->
         <activity
             android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- Authentication Screens -->
         <activity
             android:name=".WelcomeActivity"
             android:exported="false"
