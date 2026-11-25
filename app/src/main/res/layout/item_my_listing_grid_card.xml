@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="1dp"
+    app:strokeColor="@color/border_light"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- 1. ITEM IMAGE & DUAL BADGES CONTAINER (Fixed 140dp height with rounded corners) -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp">
+
+            <!-- Fallback Category Placeholder -->
+            <FrameLayout
+                android:id="@+id/layoutFallback"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_image_fallback"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/ivFallbackIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_cat_tech"
+                    app:tint="@color/brand_blue" />
+            </FrameLayout>
+
+            <!-- Main Item Image -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivItemImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/brand_blue_light"
+                android:scaleType="centerCrop"
+                android:src="@drawable/item_clicker"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
+
+            <!-- Pill Badge Top-Start: Availability Status (Available / Lent Out) -->
+            <TextView
+                android:id="@+id/tvAvailabilityBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="7dp"
+                android:background="@drawable/bg_badge_free"
+                android:fontFamily="sans-serif-bold"
+                android:paddingStart="8dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="3dp"
+                android:text="Available"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <!-- Pill Badge Top-End: Price (FREE or ₹[Price]/day) -->
+            <TextView
+                android:id="@+id/tvPriceBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="7dp"
+                android:background="@drawable/bg_badge_paid"
+                android:fontFamily="sans-serif-black"
+                android:paddingStart="8dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="3dp"
+                android:text="₹20/day"
+                android:textColor="@color/white"
+                android:textSize="10.5sp" />
+        </FrameLayout>
+
+        <!-- 2. ITEM TITLE (1-2 lines max, bold #0B2A6F) -->
+        <TextView
+            android:id="@+id/tvItemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-bold"
+            android:maxLines="2"
+            android:textColor="@color/brand_navy"
+            android:textSize="13.5sp"
+            tools:text="Presentation Clicker (Wireless 2.4GHz)" />
+
+        <!-- 3. CATEGORY & CONDITION -->
+        <TextView
+            android:id="@+id/tvItemCategoryCondition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:textColor="@color/brand_slate"
+            android:textSize="11sp"
+            tools:text="TECH • Like New" />
+
+        <!-- 4. LOCATION ROW (Location pin icon + [CampusZone]) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_location_pin"
+                app:tint="@color/brand_slate" />
+
+            <TextView
+                android:id="@+id/tvItemSpot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:textColor="@color/brand_slate"
+                android:textSize="11sp"
+                tools:text="IT Block Entrance" />
+        </LinearLayout>
+
+        <!-- Subtle Top Divider (#F1F5F9) -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="6dp"
+            android:background="#F1F5F9" />
+
+        <!-- 5. FOOTER ROW (Duration limit on left, Rating on right) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_clock"
+                app:tint="@color/brand_slate" />
+
+            <TextView
+                android:id="@+id/tvItemDuration"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:textColor="@color/brand_slate"
+                android:textSize="11sp"
+                tools:text="Up to 3 days" />
+
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-bold"
+                android:textColor="@color/brand_navy"
+                android:textSize="11sp"
+                tools:text="★ 5.0" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
