@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="1dp"
+    app:strokeColor="@color/border_light"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- 1. ITEM IMAGE & BADGE CONTAINER (Fixed 140dp height with rounded corners) -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp">
+
+            <!-- Fallback Category Placeholder (Soft background + category icon) -->
+            <FrameLayout
+                android:id="@+id/layoutFallback"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_image_fallback"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/ivFallbackIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_cat_tech"
+                    app:tint="@color/brand_blue" />
+            </FrameLayout>
+
+            <!-- Main Item Image -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivItemImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/brand_blue_light"
+                android:scaleType="centerCrop"
+                android:src="@drawable/item_calculator"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
+
+            <!-- Pill Badge: FREE (#16C7BC) or ₹[Price]/day (#0B2A6F) with bold white text -->
+            <TextView
+                android:id="@+id/tvBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="7dp"
+                android:background="@drawable/bg_badge_free"
+                android:fontFamily="sans-serif-black"
+                android:paddingStart="8dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="3dp"
+                android:text="FREE"
+                android:textColor="@color/white"
+                android:textSize="10.5sp" />
+        </FrameLayout>
+
+        <!-- 2. ITEM TITLE (1-2 lines max, bold #0B2A6F) -->
+        <TextView
+            android:id="@+id/tvItemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-bold"
+            android:maxLines="2"
+            android:textColor="@color/brand_navy"
+            android:textSize="13.5sp"
+            tools:text="Scientific Calculator" />
+
+        <!-- 3. LOCATION ROW (Location pin icon + [CampusZone] • [WalkTime] in #64748B) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_location_pin"
+                app:tint="@color/brand_slate" />
+
+            <TextView
+                android:id="@+id/tvItemSpot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:textColor="@color/brand_slate"
+                android:textSize="11.5sp"
+                tools:text="Main Library • 2m" />
+        </LinearLayout>
+
+        <!-- Subtle Top Divider (#F1F5F9) -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="6dp"
+            android:background="#F1F5F9" />
+
+        <!-- 4. FOOTER ROW (Lender avatar initial + name on left, star rating on right) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvOwnerAvatar"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/bg_avatar_mini"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
+                android:textColor="@color/brand_blue"
+                android:textSize="9.5sp"
+                tools:text="P" />
+
+            <TextView
+                android:id="@+id/tvOwnerName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:textColor="@color/brand_navy"
+                android:textSize="11sp"
+                tools:text="Priya" />
+
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-bold"
+                android:textColor="@color/brand_navy"
+                android:textSize="11.5sp"
+                tools:text="★ 5.0" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
