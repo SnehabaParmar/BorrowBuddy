@@ -1,0 +1,33 @@
+rules_version = '2';
+
+// BorrowBuddy Firebase Storage Security Rules
+// Service: firebase.storage
+// Target: Firebase project borrowbuddy-420fd
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // 1. Student Profile Avatars
+    // Path: avatars/{userId}/profile.jpg
+    match /avatars/{userId}/{allPaths=**} {
+      // Authenticated campus students can view avatars (required for public peer profile viewing)
+      allow read: if request.auth != null;
+
+      // Only the authenticated student matching the UID can upload or replace their profile photo
+      // Enforce image MIME-type check and max file size of 5MB
+      allow create, update: if request.auth != null
+                            && request.auth.uid == userId
+                            && request.resource.size < 5 * 1024 * 1024
+                            && request.resource.contentType.matches('image/.*');
+
+      // Only the authenticated student matching the UID can delete their profile photo
+      // Notice: request.resource is null on deletion, so do NOT inspect request.resource here
+      allow delete: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Default deny for all other storage paths
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

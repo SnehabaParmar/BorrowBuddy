@@ -7,22 +7,72 @@ service cloud.firestore {
     // BorrowBuddy Firestore Security Rules
     // ==========================================
 
-    // Users Collection: users/{userId}
+    // 1. Private User Documents: users/{userId}
+    // Contains sensitive private account data: email, accountStatus, createdAt
     match /users/{userId} {
-      // 1. Strict read: Users can ONLY read their own profile document
-      allow read: if request.auth != null && request.auth.uid == userId;
-
-      // 2. Strict create: Users can ONLY create their own profile document matching their authenticated UID
-      allow create: if request.auth != null && request.auth.uid == userId;
-
-      // 3. Strict update: Users can ONLY update their own profile document
-      allow update: if request.auth != null && request.auth.uid == userId;
-
-      // 4. Strict delete: Prevent deletion of user profiles from mobile client
+      // Strict read/write: Users can ONLY read and write their own private document
+      allow read, create, update: if request.auth != null && request.auth.uid == userId;
       allow delete: if false;
     }
 
-    // Default deny: Block all other collections
+    // 2. Public Student Profiles: public_profiles/{userId}
+    // Contains public profile data: fullName, college, department, yearSemester, bio, photoUri
+    // Strictly NO email, accountStatus, authentication information, or private credentials stored here!
+    match /public_profiles/{userId} {
+      // Authenticated campus students can browse and view public profiles
+      allow read: if request.auth != null;
+
+      // Users can only create their own public profile matching their authenticated UID
+      // Strict field whitelist based on public profile schema
+      // Prevent clients from arbitrarily claiming campus verification (must be false or omitted)
+      allow create: if request.auth != null && request.auth.uid == userId
+                    && request.resource.data.keys().hasOnly(['uid', 'fullName', 'college', 'department', 'yearSemester', 'bio', 'photoUri', 'isVerifiedCampusStudent'])
+                    && !('email' in request.resource.data)
+                    && !('accountStatus' in request.resource.data)
+                    && !('password' in request.resource.data)
+                    && (!('isVerifiedCampusStudent' in request.resource.data) || request.resource.data.isVerifiedCampusStudent == false);
+
+      // Users can only update their own public profile matching their authenticated UID
+      // Strict field whitelist based on public profile schema
+      // Clients cannot change isVerifiedCampusStudent from false to true
+      allow update: if request.auth != null && request.auth.uid == userId
+                    && request.resource.data.keys().hasOnly(['uid', 'fullName', 'college', 'department', 'yearSemester', 'bio', 'photoUri', 'isVerifiedCampusStudent'])
+                    && !('email' in request.resource.data)
+                    && !('accountStatus' in request.resource.data)
+                    && !('password' in request.resource.data)
+                    && (!('isVerifiedCampusStudent' in request.resource.data) 
+                        || request.resource.data.isVerifiedCampusStudent == resource.data.get('isVerifiedCampusStudent', false) 
+                        || request.resource.data.isVerifiedCampusStudent == false);
+
+      // Prevent deletion of public student profiles from mobile clients
+      allow delete: if false;
+    }
+
+    // 3. Campus Items: items/{itemId}
+    match /items/{itemId} {
+      // Authenticated campus students can browse all available items
+      allow read: if request.auth != null;
+
+      // Authenticated students can list/lend items under their authenticated UID
+      allow create: if request.auth != null && request.resource.data.ownerUid == request.auth.uid;
+
+      // Only the item owner can update or delete their item listing
+      allow update, delete: if request.auth != null && resource.data.ownerUid == request.auth.uid;
+    }
+
+    // 4. Campus Requests: campus_requests/{requestId}
+    match /campus_requests/{requestId} {
+      // Authenticated campus students can browse peer help requests in Glance feed
+      allow read: if request.auth != null;
+
+      // Authenticated students can broadcast help requests under their authenticated UID
+      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+
+      // Only the requester can update or delete their help request
+      allow update, delete: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
+
+    // Default deny: Block all other unauthorized access
     match /{document=**} {
       allow read, write: if false;
     }
