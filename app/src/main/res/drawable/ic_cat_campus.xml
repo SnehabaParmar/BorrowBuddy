@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Campus & Admin: University building / landmark -->
+    <path
+        android:fillColor="#FF0F6CF2"
+        android:pathData="M12,3L1,9l4,2.18v6L12,21l7,-3.82v-6l2,-1.09V17h2V9L12,3zM12,18.72l-5,-2.73v-3.71l5,2.73 5,-2.73v3.71l-5,2.73zM12,13L4.15,8.73 12,4.45l7.85,4.28L12,13z" />
+</vector>

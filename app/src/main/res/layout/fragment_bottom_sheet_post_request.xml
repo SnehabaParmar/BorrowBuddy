@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingTop="12dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="28dp">
+
+    <!-- Handle Bar -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_chip_unselected" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Post a Campus Request"
+        android:textColor="@color/brand_navy"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif"
+        android:text="Your need will be shown in the live Glance banner across campus."
+        android:textColor="@color/brand_slate"
+        android:textSize="12sp" />
+
+    <!-- Item Name Needed -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-bold"
+        android:text="What do you need?"
+        android:textColor="@color/brand_navy"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/etRequestItem"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_input_field"
+        android:fontFamily="sans-serif-medium"
+        android:hint="e.g. Scientific Calculator fx-991EX"
+        android:inputType="textCapSentences"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:textColor="@color/brand_navy"
+        android:textColorHint="@color/input_hint"
+        android:textSize="13sp" />
+
+    <!-- Campus Zone / Pickup Location -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:fontFamily="sans-serif-bold"
+        android:text="Where are you currently located?"
+        android:textColor="@color/brand_navy"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/etRequestLocation"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_input_field"
+        android:fontFamily="sans-serif-medium"
+        android:hint="e.g. Main Library, IMSc.IT Lab, IMBA Block"
+        android:inputType="textCapWords"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:textColor="@color/brand_navy"
+        android:textColorHint="@color/input_hint"
+        android:textSize="13sp" />
+
+    <!-- Department Selector -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:fontFamily="sans-serif-bold"
+        android:text="Target Department"
+        android:textColor="@color/brand_navy"
+        android:textSize="13sp" />
+
+    <RadioGroup
+        android:id="@+id/rgRequestDepartment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbDeptAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:fontFamily="sans-serif-medium"
+            android:text="All Campus"
+            android:textColor="@color/brand_navy"
+            android:textSize="12.5sp" />
+
+        <RadioButton
+            android:id="@+id/rbDeptIMSC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="IMSc.IT"
+            android:textColor="@color/brand_navy"
+            android:textSize="12.5sp" />
+
+        <RadioButton
+            android:id="@+id/rbDeptIMBA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="IMBA"
+            android:textColor="@color/brand_navy"
+            android:textSize="12.5sp" />
+    </RadioGroup>
+
+    <!-- Broadcast Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBroadcastRequest"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/brand_blue"
+        android:fontFamily="sans-serif-black"
+        android:text="Broadcast Request"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:cornerRadius="25dp" />
+
+</LinearLayout>

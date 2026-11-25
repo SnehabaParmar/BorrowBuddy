@@ -164,8 +164,26 @@ class RegisterActivity : AppCompatActivity() {
 
                     firestore.collection("users").document(uid).set(userData)
                         .addOnSuccessListener {
+                            // Initialize public profile document (public_profiles/{uid}) strictly WITHOUT email
+                            val publicProfileData = hashMapOf(
+                                "uid" to uid,
+                                "fullName" to fullName,
+                                "college" to "Gujarat University • Campus North",
+                                "department" to "IMSc.IT",
+                                "yearSemester" to "4th Semester",
+                                "bio" to "",
+                                "photoUri" to "",
+                                "isVerifiedCampusStudent" to false
+                            )
+                            firestore.collection("public_profiles").document(uid).set(publicProfileData)
+
                             setLoadingState(false)
                             Toast.makeText(this, "Account created successfully! Welcome, $fullName", Toast.LENGTH_SHORT).show()
+
+                            // Reset previous in-memory caches to prepare clean state for newly registered account
+                            com.borrowbuddy.app.model.StudentProfileRepository.clearSession(applicationContext)
+                            com.borrowbuddy.app.model.ExchangeRepository.clearSession()
+                            com.borrowbuddy.app.model.NotificationRepository.clearSession(applicationContext)
 
                             val intent = Intent(this, MainActivity::class.java).apply {
                                 putExtra("USER_NAME", fullName)

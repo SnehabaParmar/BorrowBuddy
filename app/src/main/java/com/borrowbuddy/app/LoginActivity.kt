@@ -119,6 +119,11 @@ class LoginActivity : AppCompatActivity() {
                     val greeting = if (!displayName.isNullOrBlank()) "Welcome back, $displayName!" else "Welcome back to BorrowBuddy!"
                     Toast.makeText(this, greeting, Toast.LENGTH_SHORT).show()
 
+                    // Reset previous in-memory caches to prepare clean state for newly logged-in account
+                    com.borrowbuddy.app.model.StudentProfileRepository.clearSession(applicationContext)
+                    com.borrowbuddy.app.model.ExchangeRepository.clearSession()
+                    com.borrowbuddy.app.model.NotificationRepository.clearSession(applicationContext)
+
                     val intent = Intent(this, MainActivity::class.java).apply {
                         putExtra("USER_NAME", displayName)
                         putExtra("USER_EMAIL", user?.email ?: email)

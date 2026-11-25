@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splash_bg"
+    android:orientation="vertical">
+
+    <!-- Sticky Header Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="2dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="14dp">
+
+        <FrameLayout
+            android:id="@+id/btnBack"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_back_button"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_close"
+                app:tint="@color/brand_navy" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="List an Item"
+                android:textColor="@color/brand_navy"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:fontFamily="sans-serif"
+                android:text="Share something you own with your campus community."
+                android:textColor="@color/brand_slate"
+                android:textSize="11.5sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Scrollable Form Container -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="24dp">
+
+            <!-- ==================== SECTION A: ITEM PHOTOS ==================== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Item Photographs *"
+                android:textColor="@color/brand_navy"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="sans-serif"
+                android:text="Upload at least one clear picture of your item * (supports multiple)."
+                android:textColor="@color/brand_slate"
+                android:textSize="11.5sp" />
+
+            <!-- Prominent Upload Area -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardImagePicker"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/brand_blue_light"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/btn_secondary_border"
+                app:strokeWidth="1.5dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_upload"
+                        app:tint="@color/brand_blue" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="sans-serif-bold"
+                        android:text="Tap to select photos from gallery"
+                        android:textColor="@color/brand_navy"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:fontFamily="sans-serif"
+                        android:text="Supports multiple photos (JPG, PNG)"
+                        android:textColor="@color/brand_slate"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Horizontal Photo Previews -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSelectedPhotos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_selected_photo" />
+
+            <!-- ==================== SECTION B: ITEM DETAILS ==================== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Item Details"
+                android:textColor="@color/brand_navy"
+                android:textSize="14sp" />
+
+            <!-- 1. Item Name (Required) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-bold"
+                android:text="Item Name *"
+                android:textColor="@color/brand_navy"
+                android:textSize="12.5sp" />
+
+            <EditText
+                android:id="@+id/etItemName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_input_field"
+                android:fontFamily="sans-serif-medium"
+                android:hint="e.g. Scientific Calculator fx-991EX, Drafter Set"
+                android:inputType="textCapSentences"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="@color/text_dark"
+                android:textColorHint="@color/input_hint"
+                android:textSize="13sp" />
+
+            <!-- 2. Category (Required) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:fontFamily="sans-serif-bold"
+                android:text="Category *"
+                android:textColor="@color/brand_navy"
+                android:textSize="12.5sp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCatTech"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Tech &amp; Chargers" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCatBooks"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Books &amp; Notes" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCatLab"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lab &amp; Aprons" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCatEvent"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Event &amp; AV Kits" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCatStationery"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stationery &amp; Tools" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCatSports"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sports &amp; Fitness" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCatBusiness"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Business &amp; IMBA" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCatCampus"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Campus &amp; Admin" />
+
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <!-- 3. Description (Optional) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:fontFamily="sans-serif-bold"
+                android:text="Description (Optional)"
+                android:textColor="@color/brand_navy"
+                android:textSize="12.5sp" />
+
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_input_field"
+                android:fontFamily="sans-serif"
+                android:gravity="top|start"
+                android:hint="Provide details about condition, included cables, or usage tips..."
+                android:inputType="textMultiLine"
+                android:paddingStart="14dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/text_dark"
+                android:textColorHint="@color/input_hint"
+                android:textSize="13sp" />
+
+            <!-- 4. Brand / Model (Optional) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:fontFamily="sans-serif-bold"
+                android:text="Brand / Model (Optional)"
+                android:textColor="@color/brand_navy"
+                android:textSize="12.5sp" />
+
+            <EditText
+                android:id="@+id/etBrandModel"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_input_field"
+                android:fontFamily="sans-serif"
+                android:hint="e.g. Casio ClassWiz, Anker 7-in-1, Yonex Carbon"
+                android:inputType="textCapWords"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="@color/text_dark"
+                android:textColorHint="@color/input_hint"
+                android:textSize="13sp" />
+
+            <!-- ==================== SECTION C: ITEM CONDITION ==================== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Item Condition *"
+                android:textColor="@color/brand_navy"
+                android:textSize="14sp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupCondition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCondBrandNew"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Brand New" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCondLikeNew"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Like New" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCondGood"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Good" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCondFair"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fair" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCondNeedsAttention"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Needs Attention" />
+
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <!-- ==================== SECTION D: LENDING PRICE ==================== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Lending Rate *"
+                android:textColor="@color/brand_navy"
+                android:textSize="14sp" />
+
+            <RadioGroup
+                android:id="@+id/rgPricing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbFree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="Free to Borrow"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/rbPaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="Paid Daily Rate"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="13sp" />
+            </RadioGroup>
+
+            <!-- Free Indicator -->
+            <LinearLayout
+                android:id="@+id/layoutFreeIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_green_pill"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_check_circle"
+                    app:tint="#059669" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="FREE for campus peers • No rental fees charged"
+                    android:textColor="#047857"
+                    android:textSize="11.5sp" />
+            </LinearLayout>
+
+            <!-- Paid Inputs (Visible when Paid selected) -->
+            <LinearLayout
+                android:id="@+id/layoutPaidInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="Price per Day (₹) *"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etDailyPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/bg_input_field"
+                    android:fontFamily="sans-serif-medium"
+                    android:hint="e.g. 25"
+                    android:inputType="number"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="@color/text_dark"
+                    android:textColorHint="@color/input_hint"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="Refundable Security Deposit (₹) (Optional)"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/etDepositPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/bg_input_field"
+                    android:fontFamily="sans-serif"
+                    android:hint="e.g. 100 (Settle directly with borrower at handover)"
+                    android:inputType="number"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="@color/text_dark"
+                    android:textColorHint="@color/input_hint"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- ==================== SECTION E: AVAILABILITY ==================== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Availability Mode *"
+                android:textColor="@color/brand_navy"
+                android:textSize="14sp" />
+
+            <RadioGroup
+                android:id="@+id/rgAvailability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp">
+
+                <RadioButton
+                    android:id="@+id/rbAvailManual"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Available Until I Manually Pause It"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="12.5sp" />
+
+                <RadioButton
+                    android:id="@+id/rbAvailDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Available Until a Specific Date"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="12.5sp" />
+
+                <RadioButton
+                    android:id="@+id/rbAvailTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Available Until a Specific Time"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="12.5sp" />
+            </RadioGroup>
+
+            <!-- Specific Time Picker Container -->
+            <LinearLayout
+                android:id="@+id/layoutAvailTimePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAvailTimeDate"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-bold"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="Date: Today"
+                        android:textColor="@color/brand_navy"
+                        android:textSize="11.5sp"
+                        app:cornerRadius="10dp"
+                        app:strokeColor="@color/border_light" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAvailStartTime"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-bold"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="From: 9:00 AM"
+                        android:textColor="@color/brand_navy"
+                        android:textSize="11.5sp"
+                        app:cornerRadius="10dp"
+                        app:strokeColor="@color/border_light" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAvailEndTime"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-bold"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="Until: 5:00 PM"
+                        android:textColor="@color/brand_blue"
+                        android:textSize="11.5sp"
+                        app:cornerRadius="10dp"
+                        app:strokeColor="@color/border_light" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Specific Date Picker Container -->
+            <LinearLayout
+                android:id="@+id/layoutAvailDatePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAvailStartDate"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-bold"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Start: Today"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="11.5sp"
+                    app:cornerRadius="10dp"
+                    app:strokeColor="@color/border_light" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAvailEndDate"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-bold"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="End: In 3 Days"
+                    android:textColor="@color/brand_blue"
+                    android:textSize="11.5sp"
+                    app:cornerRadius="10dp"
+                    app:strokeColor="@color/border_light" />
+            </LinearLayout>
+
+            <!-- Informational Availability Notice -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/brand_canvas"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/border_light"
+                app:strokeWidth="1dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:lineSpacingExtra="2dp"
+                    android:padding="12dp"
+                    android:text="Your item will automatically become unavailable when its availability period ends. You can make it available again anytime."
+                    android:textColor="@color/brand_slate"
+                    android:textSize="11.5sp" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ==================== SECTION F: LENDING LOCATION ==================== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Lending Location *"
+                android:textColor="@color/brand_navy"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="sans-serif"
+                android:text="Where can the borrower collect this item?"
+                android:textColor="@color/brand_slate"
+                android:textSize="11.5sp" />
+
+            <EditText
+                android:id="@+id/etLendingLocation"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_input_field"
+                android:fontFamily="sans-serif-medium"
+                android:hint="e.g. Computer Lab 2, Main Library, IMBA Block"
+                android:inputType="textCapWords"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="@color/text_dark"
+                android:textColorHint="@color/input_hint"
+                android:textSize="13sp" />
+
+            <!-- ==================== SECTION G: LENDING PREFERENCES ==================== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Maximum Borrowing Duration *"
+                android:textColor="@color/brand_navy"
+                android:textSize="14sp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipDurHours"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A Few Hours" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipDur1Day"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1 Day" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipDur2Days"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="2 Days" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipDur3Days"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3 Days" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipDur1Week"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1 Week" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipDurFlexible"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Flexible" />
+
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <!-- Additional Instructions (Optional) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:fontFamily="sans-serif-bold"
+                android:text="Additional Instructions (Optional)"
+                android:textColor="@color/brand_navy"
+                android:textSize="12.5sp" />
+
+            <EditText
+                android:id="@+id/etAdditionalInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_input_field"
+                android:fontFamily="sans-serif"
+                android:gravity="top|start"
+                android:hint="e.g. Please bring college ID, handle with care, return with original pouch..."
+                android:inputType="textMultiLine"
+                android:paddingStart="14dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/text_dark"
+                android:textColorHint="@color/input_hint"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Sticky CTA -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:paddingStart="16dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPublishItem"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:backgroundTint="@color/btn_primary"
+            android:fontFamily="sans-serif-bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Publish Item"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:cornerRadius="14dp" />
+    </LinearLayout>
+
+</LinearLayout>

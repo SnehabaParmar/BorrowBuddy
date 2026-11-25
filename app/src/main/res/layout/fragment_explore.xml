@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splash_bg"
+    android:orientation="vertical">
+
+    <!-- STICKY TOP SECTION: TITLE & SEARCH BAR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/splash_bg"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="10dp">
+
+        <!-- Top Header Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-black"
+                android:text="Explore Campus Items"
+                android:textColor="@color/brand_navy"
+                android:textSize="19sp" />
+
+            <!-- Scope Pill Badge -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_badge_free"
+                android:fontFamily="sans-serif-bold"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:text="All Campus"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="sans-serif"
+            android:text="Discover peer-to-peer student listings across the university."
+            android:textColor="@color/brand_slate"
+            android:textSize="11.5sp" />
+
+        <!-- 1. SEARCH SECTION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_search_bar"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="14dp"
+            android:paddingEnd="8dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="Search Icon"
+                android:src="@drawable/ic_search" />
+
+            <EditText
+                android:id="@+id/etExploreSearch"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="sans-serif-medium"
+                android:hint="Search books, gadgets, notes, tools..."
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:textColor="@color/brand_navy"
+                android:textColorHint="@color/input_hint"
+                android:textSize="13sp" />
+
+            <!-- Clear Search Button -->
+            <ImageView
+                android:id="@+id/btnClearExploreSearch"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Clear"
+                android:padding="6dp"
+                android:src="@drawable/ic_close"
+                android:visibility="gone" />
+
+            <!-- Filter Icon Button -->
+            <FrameLayout
+                android:id="@+id/btnExploreFilterToggle"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@drawable/bg_back_button"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Filter"
+                    android:src="@drawable/ic_filter" />
+
+                <!-- Active Filter Dot Indicator -->
+                <View
+                    android:id="@+id/viewFilterActiveDot"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/bg_badge_free"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- Quick Filter & Sort Chips Row -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Filter Bottom Sheet Trigger Pill -->
+                <LinearLayout
+                    android:id="@+id/chipFilterSheetTrigger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_sort"
+                        app:tint="@color/brand_navy" />
+
+                    <TextView
+                        android:id="@+id/tvActiveSortLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="sans-serif-bold"
+                        android:text="Recently Added"
+                        android:textColor="@color/brand_navy"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Quick Free Only Chip -->
+                <TextView
+                    android:id="@+id/chipQuickFree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Free Only"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="11sp" />
+
+                <!-- Quick Paid Only Chip -->
+                <TextView
+                    android:id="@+id/chipQuickPaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Paid (₹/day)"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="11sp" />
+
+                <!-- Quick Top Rated Chip -->
+                <TextView
+                    android:id="@+id/chipQuickTopRated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="★ 5.0 Rated"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="11sp" />
+
+                <!-- Quick Nearest First Chip -->
+                <TextView
+                    android:id="@+id/chipQuickNearest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Nearest First"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <!-- SCROLLABLE MARKETPLACE CONTENT -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollExploreContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="96dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 2. CATEGORY DISCOVERY SECTION -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Explore by Category"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/btnResetCategoryFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="View all"
+                    android:textColor="@color/btn_primary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Horizontally Scrollable Category Tiles -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:clipToPadding="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Cat 0: All Categories -->
+                    <LinearLayout
+                        android:id="@+id/tileExploreCatAll"
+                        android:layout_width="88dp"
+                        android:layout_height="94dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/bg_category_tile_selected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <FrameLayout
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:background="@drawable/bg_category_icon_container">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_filter"
+                                app:tint="@color/brand_blue" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvCatAllTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="sans-serif-bold"
+                            android:gravity="center"
+                            android:text="All Items"
+                            android:textColor="@color/brand_blue"
+                            android:textSize="10.5sp" />
+                    </LinearLayout>
+
+                    <!-- Cat 1: Tech & Gadgets -->
+                    <LinearLayout
+                        android:id="@+id/tileExploreCatTech"
+                        android:layout_width="88dp"
+                        android:layout_height="94dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/bg_category_tile"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <FrameLayout
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:background="@drawable/bg_category_icon_container">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_cat_tech"
+                                app:tint="@color/brand_blue" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvCatTechTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="sans-serif-bold"
+                            android:gravity="center"
+                            android:text="Tech &amp; Chargers"
+                            android:textColor="@color/brand_navy"
+                            android:textSize="10.5sp" />
+                    </LinearLayout>
+
+                    <!-- Cat 2: Books & Notes -->
+                    <LinearLayout
+                        android:id="@+id/tileExploreCatBooks"
+                        android:layout_width="88dp"
+                        android:layout_height="94dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/bg_category_tile"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <FrameLayout
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:background="@drawable/bg_category_icon_container">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_cat_books"
+                                app:tint="@color/brand_blue" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvCatBooksTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="sans-serif-bold"
+                            android:gravity="center"
+                            android:text="Books &amp; Notes"
+                            android:textColor="@color/brand_navy"
+                            android:textSize="10.5sp" />
+                    </LinearLayout>
+
+                    <!-- Cat 3: Lab & Aprons -->
+                    <LinearLayout
+                        android:id="@+id/tileExploreCatLab"
+                        android:layout_width="88dp"
+                        android:layout_height="94dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/bg_category_tile"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <FrameLayout
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:background="@drawable/bg_category_icon_container">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_cat_lab"
+                                app:tint="@color/brand_blue" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvCatLabTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="sans-serif-bold"
+                            android:gravity="center"
+                            android:text="Lab &amp; Aprons"
+                            android:textColor="@color/brand_navy"
+                            android:textSize="10.5sp" />
+                    </LinearLayout>
+
+                    <!-- Cat 4: Event & AV Kits -->
+                    <LinearLayout
+                        android:id="@+id/tileExploreCatEvent"
+                        android:layout_width="88dp"
+                        android:layout_height="94dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/bg_category_tile"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <FrameLayout
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:background="@drawable/bg_category_icon_container">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_cat_event"
+                                app:tint="@color/brand_blue" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvCatEventTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="sans-serif-bold"
+                            android:gravity="center"
+                            android:text="Event &amp; AV Kits"
+                            android:textColor="@color/brand_navy"
+                            android:textSize="10.5sp" />
+                    </LinearLayout>
+
+                    <!-- Cat 5: Sports & Fitness -->
+                    <LinearLayout
+                        android:id="@+id/tileExploreCatSports"
+                        android:layout_width="88dp"
+                        android:layout_height="94dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/bg_category_tile"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <FrameLayout
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:background="@drawable/bg_category_icon_container">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_cat_sports"
+                                app:tint="@color/brand_blue" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvCatSportsTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="sans-serif-bold"
+                            android:gravity="center"
+                            android:text="Sports &amp; Fitness"
+                            android:textColor="@color/brand_navy"
+                            android:textSize="10.5sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- 3. TRENDING / POPULAR ON CAMPUS SECTION -->
+            <LinearLayout
+                android:id="@+id/layoutTrendingSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-black"
+                        android:text="🔥 Trending on Campus"
+                        android:textColor="@color/brand_navy"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="High demand"
+                        android:textColor="@color/brand_slate"
+                        android:textSize="11.5sp" />
+                </LinearLayout>
+
+                <!-- Horizontal Trending RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTrendingItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_trending_card" />
+            </LinearLayout>
+
+            <!-- 4. RECENTLY ADDED / ALL CAMPUS LISTINGS HEADER -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvAllListingsTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:text="All Campus Listings"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="15sp" />
+
+                <!-- Count Badge -->
+                <TextView
+                    android:id="@+id/tvItemsCountBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:fontFamily="sans-serif-bold"
+                    android:paddingStart="8dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="2dp"
+                    android:text="10 Available"
+                    android:textColor="@color/brand_blue"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- 2-COLUMN GRID OF CAMPUS ITEMS -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvExploreItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/item_campus_card" />
+
+            <!-- 5. EMPTY SEARCH & FILTER STATE -->
+            <LinearLayout
+                android:id="@+id/layoutEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="40dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <FrameLayout
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/bg_category_icon_container">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_search"
+                        app:tint="@color/brand_blue" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="No campus items found"
+                    android:textColor="@color/brand_navy"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:lineSpacingExtra="2dp"
+                    android:text="Try adjusting your keywords, switching categories, or clearing active filters."
+                    android:textColor="@color/brand_slate"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnResetSearchAndFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/btn_primary"
+                    android:fontFamily="sans-serif-bold"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:text="Reset All Filters"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="12.5sp"
+                    app:cornerRadius="10dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
