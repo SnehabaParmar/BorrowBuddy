@@ -2,21 +2,64 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <!-- BorrowBuddy Brand Palette from Figma -->
+    
+    <!-- BorrowBuddy Brand Palette from Figma & Home Preview -->
     <color name="splash_bg">#F8FAFC</color>
     <color name="brand_navy">#0B2A6F</color>
     <color name="brand_slate">#64748B</color>
-    <color name="brand_blue">#0066FF</color>
+    <color name="brand_blue">#0F6CF2</color>
     <color name="brand_cyan">#00D2FF</color>
+    <color name="brand_turquoise">#16C7BC</color>
+    <color name="brand_turquoise_light">#E6FAF8</color>
+    <color name="brand_blue_light">#EEF4FF</color>
+    <color name="brand_canvas">#F8FAFC</color>
+    
     <!-- Welcome & Auth Buttons -->
     <color name="btn_primary">#0F6CF2</color>
     <color name="btn_secondary_border">#DCE5F2</color>
     <color name="btn_secondary_bg">#FFFFFF</color>
     <color name="btn_secondary_text">#0B2A6F</color>
+    
     <!-- Input Fields & Icons -->
     <color name="icon_teal">#00D09E</color>
     <color name="input_border">#DCE5F2</color>
     <color name="input_hint">#94A3B8</color>
     <color name="text_dark">#0F172A</color>
     <color name="back_btn_bg">#EEF4FF</color>
+    <color name="border_light">#E2E8F0</color>
+    
+    <!-- Badges & Accents -->
+    <color name="badge_free_bg">#16C7BC</color>
+    <color name="badge_paid_bg">#0B2A6F</color>
+    <color name="star_gold">#F59E0B</color>
+    <color name="chip_bg">#FFFFFF</color>
+    <color name="chip_selected_bg">#0F6CF2</color>
+    <color name="chip_border">#CBD5E1</color>
+    <color name="nav_unselected">#94A3B8</color>
+    <color name="nav_selected">#0F6CF2</color>
+
+    <!-- Exchange Status Badges & Stepper -->
+    <color name="status_pending_bg">#FEF3C7</color>
+    <color name="status_pending_text">#B45309</color>
+    <color name="status_active_bg">#EFF6FF</color>
+    <color name="status_active_text">#1D4ED8</color>
+    <color name="status_borrowed_bg">#ECFDF5</color>
+    <color name="status_borrowed_text">#047857</color>
+    <color name="status_return_bg">#FFF7ED</color>
+    <color name="status_return_text">#C2410C</color>
+    <color name="status_completed_bg">#F1F5F9</color>
+    <color name="status_completed_text">#475569</color>
+    <color name="status_declined_bg">#FFF1F2</color>
+    <color name="status_declined_text">#BE123C</color>
+    <color name="segmented_bg">#F1F5F9</color>
+    <color name="stepper_muted">#CBD5E1</color>
+    <color name="stepper_completed">#16C7BC</color>
+    <color name="stepper_active">#0F6CF2</color>
+
+    <!-- Profile & Danger Palette -->
+    <color name="brand_slate_light">#94A3B8</color>
+    <color name="brand_red">#DC2626</color>
+    <color name="brand_red_light">#FEF2F2</color>
+    <color name="brand_emerald">#10B981</color>
+    <color name="brand_emerald_light">#ECFDF5</color>
 </resources>
